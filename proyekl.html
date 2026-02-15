@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dunhill</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-soft: #ffdeeb;
+            --pink-bold: #ff4d6d;
+            --anime-white: #fffafa;
+        }
+       
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--pink-soft);
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,77,109,0.2) 100%);
+            z-index: 1;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.3);
+            text-align: center;
+            z-index: 10;
+            max-width: 350px;
+            border: 5px solid var(--pink-bold);
+            transform: scale(0);
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            to { transform: scale(1); }
+        }
+
+        .anime-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--pink-bold);
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Sacramento', cursive;
+            color: var(--pink-bold);
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .btn-love {
+            background: var(--pink-bold);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .btn-love:hover {
+            transform: translateY(-3px);
+            background: #ff758f;
+        }
+
+        .heart-particle {
+            position: absolute;
+            color: var(--pink-bold);
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 5;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            z-index: 2;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="card">
+        <img src="https://image2url.com/r2/default/images/1771163128958-923912fb-f0d6-4174-8214-1d5985d708f5.jpg" alt="Cute Anime" class="anime-img">
+        <h1>Happy Valentine</h1>
+        <p>untuk kamu yang paling cantik dan <b>exception</b> paling indah di hidup aku</p>
+        <button class="btn-love" onclick="makeMagic()">klik disini sayang ❤️</button>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1500);
+        }
+
+        setInterval(createHeart, 300);
+        setInterval(createSparkle, 100);
+
+        function makeMagic() {
+            for(let i=0; i<20; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+            alert("i love you so much! 💖✨");
+
+            if (!document.querySelector('.card .question')) {
+                const question = document.createElement('p');
+                question.textContent = "Mau jadi pasangan hidupku selamanya? 💍💕";
+                question.classList.add('question');
+                question.style.color = "#ff4d6d";
+                question.style.fontWeight = "bold";
+                question.style.marginTop = "20px";
+
+                const yesBtn = document.createElement('button');
+                yesBtn.textContent = "Ya ❤️";
+                yesBtn.classList.add('btn-love');
+                yesBtn.style.margin = "10px";
+                yesBtn.onclick = () => {
+        
+                    const card = document.querySelector('.card');
+                    card.innerHTML = "";
+
+                    const img = document.createElement('img');
+                    img.src = "https://image2url.com/r2/default/images/1771163029142-7ee501ca-08f7-4d7a-89fe-b818fe65a561.jpg"; // ganti dengan foto kamu
+                    img.style.width = "100%";
+                    img.style.borderRadius = "20px";
+                    img.style.boxShadow = "0 10px 30px rgba(255, 77, 109, 0.3)";
+
+                    const caption = document.createElement('p');
+                    caption.textContent = "sekian dari codingan ini,web ini mungkin akan hilang tapi kmu tidak akan pernah hilang di hatiku >< 💖✨";
+                    caption.style.color = "#ff4d6d";
+                    caption.style.fontWeight = "bold";
+                    caption.style.marginTop = "15px";
+
+                    card.appendChild(img);
+                    card.appendChild(caption);
+                };
+
+                const noBtn = document.createElement('button');
+                noBtn.textContent = "Tidak 😢";
+                noBtn.classList.add('btn-love');
+                noBtn.style.background = "#aaa";
+                noBtn.style.margin = "10px";
+                noBtn.style.position = "absolute";
+                noBtn.onmouseover = () => {
+                    noBtn.style.left = Math.random() * 200 + "px";
+                    noBtn.style.top = Math.random() * 200 + "px";
+                };
+                noBtn.ontouchstart = () => {
+    noBtn.style.left = Math.random() * 200 + "px";
+    noBtn.style.top = Math.random() * 200 + "px";
+};
+
+                noBtn.onclick = () => {
+                    alert("Eh, nggak boleh pilih 'Tidak' 😜");
+                    noBtn.style.left = Math.random() * 200 + "px";
+                    noBtn.style.top = Math.random() * 200 + "px";
+                };
+
+                const card = document.querySelector('.card');
+                card.style.position = "relative";
+                card.appendChild(question);
+                card.appendChild(yesBtn);
+                card.appendChild(noBtn);
+            }
+        }
+    </script>
+</body>
+</html>
